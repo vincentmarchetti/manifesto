@@ -20,7 +20,7 @@
     "prepublishOnly": "npm run build && npm run test",
     "test": "mocha",
     "watch": "npm run build:esmodule -- --watch",
-    "demo" : "node demo_commonjs.js"
+    "demo": "node demo_commonjs.js"
   },
   "engines": {
     "node": ">=8.9.1",
@@ -46,7 +46,9 @@
     "lodash": "^4.17.21",
     "prettier": "^3.1.1",
     "rimraf": "^5.0.5",
+    "ts-loader": "^9.5.1",
     "typescript": "^5.3.3",
+    "unfetch": "^4.2.0",
     "webpack": "^5.89.0"
   },
   "directories": {
