@@ -19,7 +19,8 @@
     "lint:all": "prettier --write \"./src/**/*.{js,jsx,json,css,ts,tsx}\"",
     "prepublishOnly": "npm run build && npm run test",
     "test": "mocha",
-    "watch": "npm run build:esmodule -- --watch"
+    "watch": "npm run build:esmodule -- --watch",
+    "demo" : "node demo_commonjs.js"
   },
   "engines": {
     "node": ">=8.9.1",
