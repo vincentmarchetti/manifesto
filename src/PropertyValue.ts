@@ -152,9 +152,21 @@ export class PropertyValue extends Array<LocalizedValue> {
     // matches the language preference.
     // FIXME: This is nasty, we have to spread ourselves in order to be able
     //        to call `.map`. This will no longer be needed once we target >ES5.
-    const allLocales = [...this]
+    // VJM 12/29/2023: Put "nasty" expression in try-catch, inserted a english-centric
+    // quick-fix
+    var allLocales;
+    try
+    {
+      allLocales = [...this]
       .map(lv => lv._locale)
       .filter(l => l !== undefined) as string[];
+    }
+    catch(err)
+    {
+        allLocales = ["en"];
+        console.warn("bypassed .map error in PropertyValue.getSuitableLocale");
+    }
+    
     // First, look for a precise match
     for (const userLocale of locales) {
       const matchingLocale = allLocales.find(l => l === userLocale);
