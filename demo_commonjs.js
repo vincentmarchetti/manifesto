@@ -49,7 +49,23 @@ const searchForAnnotations = (elem) =>
                     console.log("  url " + bodyItem.id);
                     console.log("  format " + bodyItem.getFormat());
                 });
-                console.log("target : " + anno.getTarget());
+                var target = anno.getTarget();
+                if (Array.isArray(target)) target=target[0];
+                
+                if (typeof target === 'string' || target instanceof String)
+                {
+                    console.log("target : " + target);
+                }
+                else if ( target.type && target.type == 'SpecificResource'  && target.selector.type == "PointSelector")
+                {
+                    console.log("target : SpecificResource");
+                    console.log("  source : " + target.source);
+                    var point = target.selector;
+                    var loc = [ point.x, point.y, point.z ];
+                    console.log("  location: " + loc );
+                }
+                else
+                    console.log("unidentified target : " + target);
             });
             
         });
@@ -65,7 +81,7 @@ const searchForAnnotations = (elem) =>
     }
 };
 
-let manifest_url='https://spri-open-resources.s3.us-east-2.amazonaws.com/iiif3dtsg/manifests/20231220/venus.json';
+let manifest_url='https://spri-open-resources.s3.us-east-2.amazonaws.com/iiif3dtsg/manifests/20231220/whale.json';
 //let manifest_url='http://localhost:8080/test/fixtures/pres3.json';
 Manifesto.loadManifest(manifest_url).then(e => 
 {
