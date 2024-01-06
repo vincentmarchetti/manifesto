@@ -28,17 +28,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/iiif-commons/manifesto.git"
+    "url": "git@github.com:vincentmarchetti/manifesto.git"
   },
   "keywords": [
     "IIIF"
   ],
-  "author": "@edsilv",
+  "author": "Vincent Marchetti vmarchetti@kshell.com",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/iiif-commons/manifesto/issues"
   },
-  "homepage": "https://github.com/iiif-commons/manifesto",
+  "homepage": "https://github.com/vincentmarchetti/manifesto",
   "dependencies": {
     "@edsilv/http-status-codes": "^1.0.3",
     "@iiif/vocabulary": "^1.0.26",
