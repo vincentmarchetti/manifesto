@@ -14,7 +14,7 @@ function* AnnotationsFromManifest( manifest )
 }
 
 
-let manifest_url='https://spri-open-resources.s3.us-east-2.amazonaws.com/iiif3dtsg/manifests/20231220/saxophone.json';
+let manifest_url='https://spri-open-resources.s3.us-east-2.amazonaws.com/iiif3dtsg/manifests/20231220/whale.json';
 //let manifest_url='http://localhost:8080/test/fixtures/pres3.json';
 Manifesto.loadManifest(manifest_url).then(e => 
 {
@@ -30,10 +30,21 @@ Manifesto.loadManifest(manifest_url).then(e =>
     	var annotation = iter.value;
     	
     	var target = annotation.getTarget();
-    	if (typeof(target) === 'string' )
-    		console.log("target id " + target);
-    	else
-    		console.log("complex target " + target.__jsonld);
+    	if (target.IsSpecificResource && target.getSelector().IsPointSelector )
+    	{
+    		var sel = target.getSelector();
+    		
+    		var location = sel.getLocation();
+    		
+    		console.log("PointSelector( " 	+ location.x.toString() + " , " 
+    										+ location.y.toString() + " , " 
+    										+ location.z.toString() + " )");
+    	}
+    		
+    	else if (typeof(target) == "string")
+    	{	
+    		console.log("target.id " + target );
+    	}
     }
 }).catch( (error) => console.error("error loading manifest :" +error) );
 
