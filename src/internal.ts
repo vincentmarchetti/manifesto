@@ -33,3 +33,5 @@ export * from "./Thumbnail";
 export * from "./TreeNode";
 export * from "./TreeNodeType";
 export * from "./Utils";
+export * from "./SpecificResource";
+export * from "./PointSelector";

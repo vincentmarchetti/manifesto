@@ -3,7 +3,8 @@ import {
   AnnotationBody,
   IManifestoOptions,
   ManifestResource,
-  Resource
+  Resource,
+  SpecificResource
 } from "./internal";
 
 export class Annotation extends ManifestResource {
@@ -59,8 +60,23 @@ export class Annotation extends ManifestResource {
     return this.getProperty("on");
   }
 
-  getTarget(): string | null {
-    return this.getProperty("target");
+  getTarget(): string | SpecificResource | null {
+    const rawTarget = this.getProperty("target");
+    if ( rawTarget.type && rawTarget.type == "SpecificResource" )
+    {
+    	console.log("constructing SpecificResource");
+    	return new SpecificResource(rawTarget);
+    }
+    else if (typeof(rawTarget) === 'string')
+    {
+    	console.log("returning string target");
+    	return rawTarget;
+    }
+    else
+    {
+        console.log("returnimg unknown target");
+        return rawTarget;
+    }
   }
 
   getResource(): Resource {
