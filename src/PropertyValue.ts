@@ -154,17 +154,11 @@ export class PropertyValue extends Array<LocalizedValue> {
     //        to call `.map`. This will no longer be needed once we target >ES5.
     // VJM 12/29/2023: Put "nasty" expression in try-catch, inserted a english-centric
     // quick-fix
-    var allLocales;
-    try
+    
+    var allLocales : string[] = new Array();
+    for (var lv of this)
     {
-      allLocales = [...this]
-      .map(lv => lv._locale)
-      .filter(l => l !== undefined) as string[];
-    }
-    catch(err)
-    {
-        allLocales = ["en"];
-        console.warn("bypassed .map error in PropertyValue.getSuitableLocale");
+        if (lv._locale != undefined) allLocales.push(lv._locale);
     }
     
     // First, look for a precise match
@@ -264,6 +258,7 @@ export class PropertyValue extends Array<LocalizedValue> {
 
     // Try to determine the available locale that best fits the user's preferences
     const matchingLocale = this.getSuitableLocale(locales);
+    console.log("using matchingLocale " + matchingLocale);
     if (matchingLocale) {
       const val = this.find(lv => lv._locale === matchingLocale)!._value;
       return Array.isArray(val) ? val : [val];
