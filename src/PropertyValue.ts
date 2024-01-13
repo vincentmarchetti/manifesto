@@ -150,12 +150,9 @@ export class PropertyValue extends Array<LocalizedValue> {
     // If any of the values have a language associated with them, the client
     // must display all of the values associated with the language that best
     // matches the language preference.
-    // FIXME: This is nasty, we have to spread ourselves in order to be able
-    //        to call `.map`. This will no longer be needed once we target >ES5.
-    // VJM 12/29/2023: Put "nasty" expression in try-catch, inserted a english-centric
-    // quick-fix
-    
-    var allLocales : string[] = new Array();
+
+    // create an array of the language codes for all different LocalizedValue instances in this PropertyValue
+    const allLocales  = new Array<string>();
     for (var lv of this)
     {
         if (lv._locale != undefined) allLocales.push(lv._locale);
