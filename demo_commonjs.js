@@ -14,13 +14,13 @@ function* AnnotationsFromManifest( manifest )
 }
 
 
-let manifest_url='https://spri-open-resources.s3.us-east-2.amazonaws.com/iiif3dtsg/manifests/20231220/whale.json';
+let manifest_url='https://spri-open-resources.s3.us-east-2.amazonaws.com/iiif3dtsg/manifests/20231220/astronaut.json';
 //let manifest_url='http://localhost:8080/test/fixtures/pres3.json';
 Manifesto.loadManifest(manifest_url).then(e => 
 {
     const manifest = Manifesto.parseManifest(e);
     
-    console.log("label: " + manifest.getLabel().getValue("en"));
+    console.log("label: " + manifest.getLabel().getValue("zh"));
     var generator = AnnotationsFromManifest( manifest );
     
     while (true)
