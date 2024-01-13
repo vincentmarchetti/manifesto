@@ -255,7 +255,7 @@ export class PropertyValue extends Array<LocalizedValue> {
 
     // Try to determine the available locale that best fits the user's preferences
     const matchingLocale = this.getSuitableLocale(locales);
-    console.log("using matchingLocale " + matchingLocale);
+    
     if (matchingLocale) {
       const val = this.find(lv => lv._locale === matchingLocale)!._value;
       return Array.isArray(val) ? val : [val];
