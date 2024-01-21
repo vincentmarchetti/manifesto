@@ -1,29 +1,14 @@
 # manifesto
 
-[![Build Status](https://travis-ci.org/IIIF-Commons/manifesto.svg?branch=master)](https://travis-ci.org/IIIF-Commons/manifesto)
+Fork of the [IIIF-Commons/manifesto](https://github.com/IIIF-Commons/manifesto) manifesto. It is intended for development of IIIF API that will support
+sharing 3D assets alongside 2D and audio-visual resources, development supported by the [IIIF 3D Technical Study Group](https://iiif.io/community/groups/3d/tsg/)
 
-IIIF Presentation API client and server utility library.
 
-    npm install manifesto.js --save
 
-## Getting Started
+## Branch Structure
+The branch kshell-main is the default branch and should be considered the main public branch for development. The master branch will be periodically
+synchronized with [IIIF-Commons/manifesto](https://github.com/IIIF-Commons/manifesto) and if appropriate merged with kshell-main.
 
-### Documentation
+## Differences with [IIIF-Commons/manifesto](https://github.com/IIIF-Commons/manifesto)
+January 2024
 
-https://iiif-commons.github.io/manifesto/
-
-### Developer Setup
-
-    git clone https://github.com/iiif-commons/manifesto.git
-    npm install
-    npm build
-    npm test
-
-### Publishing Package
-
-    git checkout master
-    npm version patch
-    git add .
-    git commit -m "Release v1.2.3"
-    git tag v1.2.3
-    git push origin master v1.2.3
