@@ -4,43 +4,56 @@ import {
   IManifestoOptions,
   Manifest,
   ManifestResource,
+  Resource,
   Thumb,
   Thumbnail,
   Utils
 } from "./internal";
 
 export class Sequence extends ManifestResource {
-  public items: Canvas[] = [];
+  public items: Resource[] = [];
   private _thumbnails: Thumbnail[] | null = null;
 
   constructor(jsonld?: any, options?: IManifestoOptions) {
     super(jsonld, options);
   }
-
-  getCanvases(): Canvas[] {
+  
+  getCanvasScenes() : Resource[] {
     if (this.items.length) {
       return this.items;
     }
 
-    let items = this.__jsonld.canvases || this.__jsonld.elements;
+    let raw_items = this.__jsonld.canvases || 
+                    this.__jsonld.elements ||
+                    this.__jsonld ;
 
-    if (items) {
-      for (let i = 0; i < items.length; i++) {
-        const c = items[i];
-        const canvas: Canvas = new Canvas(c, this.options);
-        canvas.index = i;
-        this.items.push(canvas);
+    if (raw_items) {
+      for (let i = 0; i < raw_items.length; i++) {
+        const c = raw_items[i];
+        let res : Resource | undefined = undefined;
+        if (c["type"] === "Canvas") 
+            new Canvas(c, this.options);
+        
+        if (res) this.items.push( res as Resource);
+        
       }
-    } else if (this.__jsonld) {
-      for (let i = 0; i < this.__jsonld.length; i++) {
-        const c = this.__jsonld[i];
-        const canvas: Canvas = new Canvas(c, this.options);
-        canvas.index = i;
-        this.items.push(canvas);
-      }
-    }
+    } 
 
     return this.items;
+  }
+
+
+  getCanvases(): Canvas[] {
+  
+    let resources : Resource[] = this.getCanvasScenes();
+    let retVal:Canvas[] = [];
+    
+    for (let rs of resources)
+        if (rs instanceof Canvas)
+            retVal.push( rs as Canvas);
+    
+
+    return retVal;
   }
 
   getCanvasById(id: string): Canvas | null {
