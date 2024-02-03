@@ -96,7 +96,7 @@ export class Scene extends Resource {
       }
 
       // presentation 3.0
-      images = this.getContent();
+      images = this.Content;
 
       if (images && images.length) {
         const firstImage: Annotation = images[0];
@@ -184,7 +184,7 @@ export class Scene extends Resource {
   }
 
   // Presentation API 3.0
-  getContent(): Annotation[] {
+  get Content(): Annotation[] {
     const content: Annotation[] = [];
 
     const items = this.__jsonld.items || this.__jsonld.content;
@@ -318,7 +318,7 @@ export class Scene extends Resource {
   }
 
   get resourceAnnotations() {
-    return flattenDeep([this.getImages(), this.getContent()]);
+    return flattenDeep([this.getImages(), this.Content]);
   }
 
   /**

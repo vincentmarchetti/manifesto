@@ -64,17 +64,17 @@ export class Annotation extends ManifestResource {
     const rawTarget = this.getProperty("target");
     if ( rawTarget.type && rawTarget.type == "SpecificResource" )
     {
-    	console.log("constructing SpecificResource");
+    	//console.log("constructing SpecificResource");
     	return new SpecificResource(rawTarget);
     }
     else if (typeof(rawTarget) === 'string')
     {
-    	console.log("returning string target");
+    	//console.log("returning string target");
     	return rawTarget;
     }
     else
     {
-        console.log("returnimg unknown target");
+        //console.log("returnimg unknown target");
         return rawTarget;
     }
   }

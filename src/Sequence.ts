@@ -1,6 +1,7 @@
 import { ViewingDirection, ViewingHint } from "@iiif/vocabulary/dist-commonjs";
 import {
   Canvas,
+  Scene,
   IManifestoOptions,
   Manifest,
   ManifestResource,
@@ -18,7 +19,7 @@ export class Sequence extends ManifestResource {
     super(jsonld, options);
   }
   
-  getCanvasScenes() : Resource[] {
+  get CanvasScenes() : Resource[] {
     if (this.items.length) {
       return this.items;
     }
@@ -32,8 +33,10 @@ export class Sequence extends ManifestResource {
         const c = raw_items[i];
         let res : Resource | undefined = undefined;
         if (c["type"] === "Canvas") 
-            new Canvas(c, this.options);
-        
+            res = new Canvas(c, this.options);
+        else if (c["type"] === "Scene")
+            res = new Scene(c, this.options);
+            
         if (res) this.items.push( res as Resource);
         
       }
@@ -42,10 +45,23 @@ export class Sequence extends ManifestResource {
     return this.items;
   }
 
+  get Scenes(): Scene[]
+  {
+    let resources : Resource[] = this.CanvasScenes;
+    let retVal:Scene[] = [];
+    
+    for (let rs of resources)
+        if (rs instanceof Scene)
+            retVal.push( rs as Scene);
+    
+
+    return retVal;
+
+  }
 
   getCanvases(): Canvas[] {
   
-    let resources : Resource[] = this.getCanvasScenes();
+    let resources : Resource[] = this.CanvasScenes;
     let retVal:Canvas[] = [];
     
     for (let rs of resources)

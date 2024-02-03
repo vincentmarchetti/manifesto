@@ -24,13 +24,14 @@ Manifesto.loadManifest(manifest_url).then(e =>
     
     const canvases = manifest.getSequences()[0].getCanvases();
     console.log("canvases " + canvases.length);
-    while (false)
+    
+    const scenes = manifest.getSequences()[0].Scenes;
+    console.log("scenes " + scenes.length);
+    console.log("scenes[0].Content " + scenes[0].Content );
+    
+    for (const annotation of scenes[0].Content )
     {
-    	var iter = generator.next();
-    	if (iter.done)  break;
-    	var annotation = iter.value;
-    	
-    	var target = annotation.getTarget();
+        var target = annotation.getTarget();
     	if (target.IsSpecificResource && target.getSelector().IsPointSelector )
     	{
     		var sel = target.getSelector();
@@ -47,6 +48,7 @@ Manifesto.loadManifest(manifest_url).then(e =>
     		console.log("target.id " + target );
     	}
     }
+
 }).catch( (error) => console.error("error loading manifest :" +error) );
 
 
