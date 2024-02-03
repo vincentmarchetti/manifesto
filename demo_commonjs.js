@@ -13,12 +13,15 @@ function* AnnotationsFromManifest( manifest )
 	}
 }
 
-
-let manifest_url='https://raw.githubusercontent.com/IIIF/3d/main/manifests/model_origin.json';
+//const manifests = []
+for (var manifest_url of ["https://raw.githubusercontent.com/IIIF/3d/main/manifests/model_origin.json",
+                          "https://raw.githubusercontent.com/IIIF/3d/main/manifests/model_position.json"])
+{
 
 Manifesto.loadManifest(manifest_url).then(e => 
 {
-    console.log("manifest downloaded");
+    
+    console.log("manifest " + e.id + " downloaded");
     const manifest = Manifesto.parseManifest(e);
     console.log("manifest parsed");
     
@@ -27,20 +30,25 @@ Manifesto.loadManifest(manifest_url).then(e =>
     
     const scenes = manifest.getSequences()[0].Scenes;
     console.log("scenes " + scenes.length);
-    console.log("scenes[0].Content " + scenes[0].Content );
+    
     
     for (const annotation of scenes[0].Content )
     {
         var target = annotation.getTarget();
-    	if (target.IsSpecificResource && target.getSelector().IsPointSelector )
+       
+    	if (target.isSpecificResource )
     	{
-    		var sel = target.getSelector();
+    	    console.log("SpecificResource source: " + target.Source);
+    	    
     		
-    		var location = sel.getLocation();
     		
-    		console.log("PointSelector( " 	+ location.x.toString() + " , " 
-    										+ location.y.toString() + " , " 
-    										+ location.z.toString() + " )");
+    		var location = target.Selector.Location;
+    		
+    		// dev note : following expression uses javascript template literal
+		    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Text_formatting
+		    var positionString = `${location.x}, ${location.y}, ${location.z}`
+    		
+    		console.log("PointSelector( " + positionString +  " )");
     	}
     		
     	else if (typeof(target) == "string")
@@ -48,9 +56,9 @@ Manifesto.loadManifest(manifest_url).then(e =>
     		console.log("target.id " + target );
     	}
     }
-
+    console.log();
 }).catch( (error) => console.error("error loading manifest :" +error) );
-
+}
 
 
 

@@ -9,28 +9,49 @@ export class SpecificResource extends JSONLDResource  {
 
   options: IManifestoOptions;
   
-  IsSpecificResource : boolean = true;
+  isSpecificResource : boolean = true;
 
   constructor(jsonld: any, options?: IManifestoOptions) {
     super(jsonld);
     this.options = <IManifestoOptions>options;
   }
   
-  getSource() : string 
+  get Source() : string 
   {
-  	return this.getProperty("source");  	  	
+  	const raw =  this.getProperty("source");
+  	if (raw)
+  	{
+  	    var item = ([].concat(raw))[0];
+  	    if (item)
+  	    {
+  	        if (typeof(item) === "string")  return item;
+  	        else
+  	        {
+  	            const id = item["id"];
+  	            if (typeof(id) === "string") return id;
+  	        } 
+  	    }
+  	}
+  	throw new Error("cannot resolve Source " + JSON.stringify(raw));
   }
   
-  getSelector() : PointSelector | undefined
+  get Selector() : PointSelector 
   {
-  	const sel = this.getProperty("selector");
-  	if ( sel.type && sel.type == "PointSelector")
-  	{
-  		return new PointSelector( sel );
+  	const raw =  this.getProperty("selector");  
+  	if (raw){
+        var item = ([].concat(raw))[0];
+    
+        if (item)
+        {
+            if (item["type"] === "PointSelector") return new PointSelector(item);
+            else
+            {
+                throw new Error("unable to resolve SpecificResource selector " + JSON.stringify(item));
+            }
+        }
   	}
-  	else{
-  		return sel;
-  	}
+  	throw new Error("unable to resolve SpecificResource raw selector " + JSON.stringify(raw));
+  	
   }
   
 }
