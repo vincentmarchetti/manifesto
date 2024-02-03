@@ -20,7 +20,7 @@
     "prepublishOnly": "npm run build && npm run test",
     "test": "mocha",
     "watch": "npm run build:esmodule -- --watch",
-    "demo": "node demo_commonjs.js"
+    "demo": "npm run build:commonjs && node demo_commonjs.js"
   },
   "engines": {
     "node": ">=8.9.1",
