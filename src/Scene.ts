@@ -1,5 +1,4 @@
 import {
-  ExternalResourceType,
   ViewingHint
 } from "@iiif/vocabulary/dist-commonjs";
 import {
@@ -303,11 +302,11 @@ export class Scene extends Resource {
   //}
 
   getWidth(): number {
-    return this.getProperty("width");
+    throw new Error("getWidth() method undefined for Scene");
   }
 
   getHeight(): number {
-    return this.getProperty("height");
+    throw new Error("getHeight() method undefined for Scene");
   }
 
   getViewingHint(): ViewingHint | null {
@@ -315,32 +314,7 @@ export class Scene extends Resource {
   }
 
   get imageResources() {
-    const resources = flattenDeep([
-      this.getImages().map(i => i.getResource()),
-      this.getContent().map(i => i.getBody())
-    ]);
-
-    return flatten(
-      resources.map(resource => {
-        switch (resource.getProperty("type").toLowerCase()) {
-          case ExternalResourceType.CHOICE:
-          case ExternalResourceType.OA_CHOICE:
-            return new Canvas(
-              {
-                images: flatten([
-                  resource.getProperty("default"),
-                  resource.getProperty("item")
-                ]).map(r => ({ resource: r }))
-              },
-              this.options
-            )
-              .getImages()
-              .map(i => i.getResource());
-          default:
-            return resource;
-        }
-      })
-    );
+    throw new Error("imageResources() method undefined for Scene");
   }
 
   get resourceAnnotations() {
@@ -377,16 +351,14 @@ export class Scene extends Resource {
   }
 
   get iiifImageResources() {
-    return this.imageResources.filter(
-      r => r && r.getServices()[0] && r.getServices()[0].id
-    );
+    throw new Error("iiifImageResources() method undefined for Scene");
   }
 
   get imageServiceIds() {
-    return this.iiifImageResources.map(r => r.getServices()[0].id);
+    throw new Error("imageServiceIds() method undefined for Scene");
   }
 
   get aspectRatio() {
-    return this.getWidth() / this.getHeight();
+    throw new Error("get aspectRatio() method undefined for Scene");
   }
 }
