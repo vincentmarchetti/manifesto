@@ -14,13 +14,13 @@
     "build:types": "dts-bundle-generator --umd-module-name manifesto -o types/index.d.ts dist-esmodule/index.d.ts",
     "build:umd": "webpack",
     "build:var": "cross-env NODE_WEBPACK_LIBRARY_PATH=dist-var NODE_WEBPACK_LIBRARY_TARGET=var webpack",
-    "build": "npm run clean && npm run build:commonjs && npm run build:esmodule && npm run build:umd && npm run build:types && npm run build:var",
+    "build": "npm run clean && npm run build:commonjs && npm run build:umd && npm run build:types && npm run build:var",
     "clean": "rimraf -rf dist-umd dist-commonjs dist-esmodule dist-var types",
     "lint:all": "prettier --write \"./src/**/*.{js,jsx,json,css,ts,tsx}\"",
     "prepublishOnly": "npm run build && npm run test",
     "test": "mocha",
     "watch": "npm run build:esmodule -- --watch",
-    "demo": "npm run build:commonjs && node demo_commonjs.js"
+    "demo": "npm run build:umd && node demo_commonjs.js"
   },
   "engines": {
     "node": ">=8.9.1",
@@ -49,6 +49,7 @@
     "isomorphic-unfetch": "^4.0.2",
     "lodash": "^4.17.21",
     "mocha": "^10.2.0",
+    "node-fetch": "2",
     "prettier": "^3.1.1",
     "rimraf": "^5.0.5",
     "serve-static": "^1.14.1",
