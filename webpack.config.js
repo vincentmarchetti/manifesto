@@ -20,7 +20,7 @@ const config = {
     // The output defines how and where we want the bundles. The special value `[name]` in `filename` tells Webpack to use the name we defined above.
     // We target a UMD and name it manifesto. When including the bundle in the browser it will be accessible at `window.manifesto`
     output: {
-        path: resolvePath('dist-umd'),
+        path: resolvePath('public'),
         filename: '[name].js',
         libraryTarget: 'umd',
         library: 'manifesto',
