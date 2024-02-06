@@ -1,7 +1,7 @@
 "use strict";
 
 console.log("Running demo_commnjs");
-const Manifesto=require("./dist-commonjs/index.js");
+const Manifesto=require("./public/manifesto.js");
 
 // generator function
 function* AnnotationsFromManifest( manifest )
