@@ -20,7 +20,8 @@
     "prepublishOnly": "npm run build && npm run test",
     "test": "mocha",
     "watch": "npm run build:esmodule -- --watch",
-    "demo": "npm run build:umd && node demo_commonjs.js"
+    "demo": "npm run build:umd && node demo_commonjs.js",
+    "webpage": "http-server ./public --silent -o"
   },
   "engines": {
     "node": ">=8.9.1",
@@ -46,6 +47,7 @@
     "cross-env": "^7.0.3",
     "dts-bundle-generator": "^9.1.0",
     "finalhandler": "^1.2.0",
+    "http-server": "^14.1.1",
     "isomorphic-unfetch": "^4.0.2",
     "lodash": "^4.17.21",
     "mocha": "^10.2.0",
