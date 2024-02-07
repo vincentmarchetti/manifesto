@@ -8,8 +8,8 @@ function* AnnotationsFromManifest( manifest )
 {
 	for (const seq of manifest.getSequences())
 	{
-		const canv = seq.getCanvases()[0];
-		for (const anno of canv.getContent()) yield anno;
+		const scene = seq.Scenes[0];
+		for (const anno of scene.Content ) yield anno;
 	}
 }
 
