@@ -42,7 +42,7 @@
     "build": {
       "name": "build",
       "command": "npm run build",
-      "runAtStart": false
+      "runAtStart": true
     },
     "clean": {
       "name": "clean",
@@ -77,7 +77,7 @@
     "build:webpage": {
       "name": "build:webpage",
       "command": "npm run build:webpage",
-      "runAtStart": false
+      "runAtStart": true
     },
     "webpage": {
       "name": "webpage",
