@@ -1,0 +1,96 @@
+{
+  // These tasks will run in order when initializing your CodeSandbox project.
+  "setupTasks": [
+    {
+      "name": "Install Dependencies",
+      "command": "npm install"
+    }
+  ],
+
+  // These tasks can be run from CodeSandbox. Running one will open a log in the app.
+  "tasks": {
+    "build:commonjs": {
+      "name": "build:commonjs",
+      "command": "npm run build:commonjs",
+      "runAtStart": false
+    },
+    "build:docs": {
+      "name": "build:docs",
+      "command": "npm run build:docs",
+      "runAtStart": false
+    },
+    "build:esmodule": {
+      "name": "build:esmodule",
+      "command": "npm run build:esmodule",
+      "runAtStart": false
+    },
+    "build:types": {
+      "name": "build:types",
+      "command": "npm run build:types",
+      "runAtStart": false
+    },
+    "build:umd": {
+      "name": "build:umd",
+      "command": "npm run build:umd",
+      "runAtStart": false
+    },
+    "build:var": {
+      "name": "build:var",
+      "command": "npm run build:var",
+      "runAtStart": false
+    },
+    "build": {
+      "name": "build",
+      "command": "npm run build",
+      "runAtStart": true
+    },
+    "clean": {
+      "name": "clean",
+      "command": "npm run clean",
+      "runAtStart": false
+    },
+    "lint:all": {
+      "name": "lint:all",
+      "command": "npm run lint:all",
+      "runAtStart": false
+    },
+    "prepublishOnly": {
+      "name": "prepublishOnly",
+      "command": "npm run prepublishOnly",
+      "runAtStart": false
+    },
+    "test": {
+      "name": "test",
+      "command": "npm run test",
+      "runAtStart": false
+    },
+    "test:3d": {
+      "name": "test:3d",
+      "command": "npm run test:3d",
+      "runAtStart": false
+    },
+    "watch": {
+      "name": "watch",
+      "command": "npm run watch",
+      "runAtStart": false
+    },
+    "build:webpage": {
+      "name": "build:webpage",
+      "command": "npm run build:webpage",
+      "runAtStart": true
+    },
+    "webpage": {
+      "name": "webpage",
+      "command": "npm run webpage",
+      "runAtStart": false
+    },
+    "start": {
+      "name": "start",
+      "command": "npm run start",
+      "runAtStart": true,
+      "preview": {
+        "port": 8080
+      }
+    }
+  }
+}
