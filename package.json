@@ -22,7 +22,7 @@
     "watch": "npm run build:esmodule -- --watch",
     "build:webpage": "npm run build && cpy dist-umd  dist-esmodule webpage/public",
     "webpage": "http-server ./webpage/public  -o",
-    "start": "npm run webpage"
+    "start": "npm run build:webpage && npm run webpage"
   },
   "engines": {
     "node": ">=8.9.1",
