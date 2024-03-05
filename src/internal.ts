@@ -1,9 +1,14 @@
 export * from "./JSONLDResource";
+export * from "./Transform";
 export * from "./ManifestResource";
 export * from "./Resource";
 export * from "./IIIFResource";
-export * from "./Annotation";
+export * from "./SpecificResource";
+export * from "./SpecificResourceForTarget";
+export * from "./SpecificResourceForBody";
 export * from "./AnnotationBody";
+export * from "./Annotation";
+
 export * from "./AnnotationList";
 export * from "./AnnotationPage";
 export * from "./Canvas";
@@ -29,10 +34,17 @@ export * from "./Sequence";
 export * from "./Serialisation";
 export * from "./Service";
 export * from "./Size";
-export * from "./SpecificResource";
+
 export * from "./StatusCode";
 export * from "./Thumb";
 export * from "./Thumbnail";
+export * from "./Transform";
+
+export * from "./TranslateTransform";
+export * from "./TransformParser";
 export * from "./TreeNode";
 export * from "./TreeNodeType";
 export * from "./Utils";
+export * from "./TranslateTransform";
+export * from "./RotateTransform";
+export * from "./ScaleTransform";

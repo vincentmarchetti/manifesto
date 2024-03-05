@@ -48,19 +48,21 @@ export class Scene extends ManifestResource {
     // "#FF00FF" -- interpreted as three hexadecimal values
     // in range 0-255 . Not that the \w escape matches digits,
     // upper and lower case latin characters, and underscore
-    var hexColorFormat = new RegExp("#(\w{2})(\w{2})(\w{2})");
+    var regexPattern:string = "\#(\\w{2})(\\w{2})(\\w{2})";
+    
+    var hexColorFormat = new RegExp(regexPattern);
     
     var backgroundColorValue = this.__jsonld.backgroundColor;
-    console.log("backgroundColorValue " + backgroundColorValue);
+    
     if (backgroundColorValue && typeof(backgroundColorValue) == 'string')
     {
         var matchResult = backgroundColorValue.match(hexColorFormat);
-        console.log("matchResult " + matchResult);
+        
         if  (matchResult){
             return {
-                red   : parseInt(matchResult[0],16),
-                green : parseInt(matchResult[1],16),
-                blue  : parseInt(matchResult[2],16)
+                red   : parseInt(matchResult[1],16),
+                green : parseInt(matchResult[2],16),
+                blue  : parseInt(matchResult[3],16)
             }
         }
     }
