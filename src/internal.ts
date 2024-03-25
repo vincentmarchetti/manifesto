@@ -6,7 +6,10 @@ export * from "./IIIFResource";
 export * from "./SpecificResource";
 export * from "./SpecificResourceForTarget";
 export * from "./SpecificResourceForBody";
+
 export * from "./AnnotationBody";
+export * from "./Light";
+export * from "./AnnotationBodyParser";
 export * from "./Annotation";
 
 export * from "./AnnotationList";
@@ -48,3 +51,4 @@ export * from "./Utils";
 export * from "./TranslateTransform";
 export * from "./RotateTransform";
 export * from "./ScaleTransform";
+export * from "./Color";

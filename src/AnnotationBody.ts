@@ -9,9 +9,20 @@ export class AnnotationBody extends ManifestResource {
     super(jsonld, options);
   }
 
+  get isModel():boolean  {
+    var normalized_type = Utils.normaliseType(this.getProperty("type"));
+    return ( normalized_type == ExternalResourceType.MODEL );
+  }
+  
+   get isLight():boolean  {
+    var normalized_type = Utils.normaliseType(this.getProperty("type"));
+    return ( normalized_type == "light" );
+  }
+
+
   getFormat(): MediaType | null {
     const format: string = this.getProperty("format");
-    console.log("getFormat() : format is "+format);
+    //console.log("getFormat() : format is "+format);
     if (format) {
       return Utils.getMediaType(format);
     }
@@ -38,4 +49,5 @@ export class AnnotationBody extends ManifestResource {
   getHeight(): number {
     return this.getProperty("height");
   }
+  
 }

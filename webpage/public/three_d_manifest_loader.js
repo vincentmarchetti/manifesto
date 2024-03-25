@@ -21,32 +21,60 @@ function* AnnotationsFromManifest( manifest )
 // then the Inline node will be enclodes in an X3D Transform node
 function AddAnnotationToScenegraph(anno, annotation_container)
 {
-	var inlineElement = document.createElement('inline');
-	var target = anno.getTarget();
-	var body = anno.getBody3D();
+    var wrappedElement;
+    var body = anno.getBody3D();
+    
+    var source = (body.isSpecificResource)?body.getSource():body;
+    
+    if (source.isModel){
+        wrappedElement = document.createElement('inline');
+        wrappedElement.setAttribute('url', source.id);
+    }
+    else if (source.isLight ){
+        if (source.isAmbientLight){
+            wrappedElement = document.createElement('pointlight');
+            wrappedElement.setAttribute("intensity", "0.0");
+            wrappedElement.setAttribute("global", "true");
+            
+            wrappedElement.setAttribute("ambientIntensity", source.getIntensity().toString() );
+            
+            var light_color = source.getColor();
+            var rgbAttr = [
+    	        Math.max(0.0,Math.min(1.0, light_color.red/255)),
+    	        Math.max(0.0,Math.min(1.0, light_color.green/255)),
+    	        Math.max(0.0,Math.min(1.0, light_color.blue/255)),
+    	    ].join(" ");
+            wrappedElement.setAttribute("color", rgbAttr);
+            
+        }
+        else{
+            console.log("unknown light " + source.getType());
+        }
+    }
+    
 	
-	var wrappedElement = inlineElement;
+	var target = anno.getTarget();
+	
 	
 	if (body.isSpecificResource)
 	{
-	    var source = body.getSource();
-	    inlineElement.setAttribute('url', source.id);
+	    
 	    
 	    var transforms = body.getTransform();
 	    for (var i = 0; i < transforms.length;++i){
 	        var transform = transforms[i];
 	        var transformNode=document.createElement('transform');
-	        if (transform.isTranslateTransform()){
+	        if (transform.isTranslateTransform ){
 	            var tdata = transform.getTranslation();
 	            var translationString = `${tdata.x} ${tdata.y} ${tdata.z}`;
 	            transformNode.setAttribute("translation", translationString);
 	        }
-	        else if (transform.isScaleTransform()){
+	        else if (transform.isScaleTransform ){
 	            var sdata = transform.getScale();
 	            var scaleString = `${sdata.x} ${sdata.y} ${sdata.z}`;
 	            transformNode.setAttribute("scale", scaleString);
 	        }
-	        else if (transform.isRotateTransform()){
+	        else if (transform.isRotateTransform ){
 	            // this procedure for determining the rotationAxis
 	            // is intended to only work when only component is non-zero
 	            var attributes=["x","y","z"];
@@ -74,9 +102,7 @@ function AddAnnotationToScenegraph(anno, annotation_container)
 	        wrappedElement = transformNode;
 	    }
 	}
-	else{
-	    inlineElement.setAttribute('url', body.id);
-	}
+	
 	
 	if (target.isSpecificResource && target.getSelector().isPointSelector )
 	{
@@ -143,4 +169,9 @@ function SetAxesVisibility( isVisible )
         console.log("setting switch choice to " + choice);
         axes_switch_node.setAttribute('whichChoice', choice);
     }    
+}
+
+function SetHeadlightOn( isOn ){
+    var navigationinfo_node = document.getElementById("navigationinfo-node");
+    navigationinfo_node.setAttribute("headlight", isOn);
 }

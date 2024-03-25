@@ -3,7 +3,8 @@ import {
   Annotation,
   AnnotationPage,
   IManifestoOptions,
-  ManifestResource
+  ManifestResource,
+  Color
 } from "./internal";
 
 export class Scene extends ManifestResource {
@@ -43,30 +44,20 @@ export class Scene extends ManifestResource {
   };
 
  
-  getBackgroundColor() : object | undefined {
+  getBackgroundColor() : Color | undefined {
     // regular expression intended to match strings like
     // "#FF00FF" -- interpreted as three hexadecimal values
     // in range 0-255 . Not that the \w escape matches digits,
     // upper and lower case latin characters, and underscore
-    var regexPattern:string = "\#(\\w{2})(\\w{2})(\\w{2})";
+    // currently only supports the form for CSS
+    // https://www.w3.org/wiki/CSS/Properties/color/RGB
+    // with 6 hexadecimal digits
     
-    var hexColorFormat = new RegExp(regexPattern);
-    
-    var backgroundColorValue = this.__jsonld.backgroundColor;
-    
-    if (backgroundColorValue && typeof(backgroundColorValue) == 'string')
-    {
-        var matchResult = backgroundColorValue.match(hexColorFormat);
-        
-        if  (matchResult){
-            return {
-                red   : parseInt(matchResult[1],16),
-                green : parseInt(matchResult[2],16),
-                blue  : parseInt(matchResult[3],16)
-            }
-        }
-    }
-    return undefined;
+    var bgc: string | undefined  = this.getProperty("backgroundColor");
+    if (bgc)
+        return Color.fromCSS( bgc as string );
+    else
+        return undefined;
   };
 
 }
