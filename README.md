@@ -1,3 +1,9 @@
+# Archive
+
+This repository should not be used as basis for further work.
+
+3D extensions to the IIIF manifesto library are being developed in https://github.com/IIIF-Commons/manifesto-3d
+
 # manifesto
 
 Client and server utility library to support draft 3D extensions to to the IIIF Presentation API client and server utility library.
